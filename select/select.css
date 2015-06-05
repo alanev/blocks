@@ -1,0 +1,39 @@
+.select{
+	position: relative;
+}
+.select__selected{
+}
+.select__list{
+	position: absolute;
+	box-sizing: border-box;
+	min-width: 100%;
+	line-height: 20px;
+	visibility: hidden;
+}
+.select__list_pos_down{
+	top: 100%;
+	margin-top: 10px;
+}
+.select__list_pos_up{
+	bottom: 100%;
+	margin-bottom: 10px;
+}
+.select__list_pos_left{
+	left: 0;
+	margin-left: 10px;
+}
+.select__list_pos_right{
+	right: 0;
+	margin-right: 10px;
+}
+.select__item{
+	padding: 0 10px;
+	white-space: nowrap;
+}
+.select__item.selected,
+.select__item:hover{
+	background: red;
+}
+.select.open .select__list{
+	visibility: visible;
+}

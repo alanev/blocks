@@ -1,0 +1,44 @@
+
+/*-----  Up  -----*/
+.up{
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	bottom: 0;
+	max-width: 100px;
+	min-width: 30px;
+	width: 10%;
+	background: red;
+	text-align: center;
+	opacity: 0;
+	transition: .3s;
+	visibility: hidden;
+	cursor: pointer;
+}
+.up_pos_left{
+	left: 0;
+}
+.up_pos_right{
+	right: 0;
+}
+.up.down:after{
+	transform: rotate(180deg);
+}
+.up.down,
+.up.active{
+	opacity: .6;
+	visibility: visible;
+}
+.up:after{
+	content: '';
+	display: inline-block;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent;
+	border-top-width: 0;
+	border-bottom-color: black;
+	margin: 20% 0 0;
+}
+.up:hover{
+	opacity: 1;
+}
