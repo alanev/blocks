@@ -1,0 +1,9 @@
+.textmore__hidden{
+	display: none;
+}
+.textmore__toggle_text:before{
+	content: 'Показать ';
+}
+.textmore__toggle_text.active:before{
+	content: 'Скрыть ';
+}

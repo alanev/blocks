@@ -1,0 +1,8 @@
+.g-page{
+	position: relative;
+	max-width: 1520px;
+	min-width: 320px;
+	background: #fff;
+	padding: 0 20px;
+	overflow: hidden;
+}

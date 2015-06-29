@@ -1,0 +1,7 @@
+.g-section{
+	
+}
+.g-section__wrapper{
+	width: var(--wrapper);
+	margin: 0 auto;
+}

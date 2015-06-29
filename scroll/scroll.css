@@ -1,0 +1,27 @@
+body{
+	margin: 0;
+}
+.scroll{
+	position: relative;
+	height: 100vh;
+	overflow: hidden;
+	background-image: linear-gradient(0deg, #000, #fff);
+	background-repeat: repeat;
+	background-size: 10px 10px;
+}
+.scroll__bar{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	width: 10px;
+	border: 1px solid #999;
+}
+.scroll__pane{
+	background: #fff;
+	opacity: .4;
+}
+.scroll__content{
+	height: 500vh;
+}
