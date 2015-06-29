@@ -9,6 +9,10 @@ a{
 a:hover{
 	text-decoration:none;
 }
+mark{
+	background: none;
+	color: red;
+}
 strong, b{
 	font-weight:700;
 }
