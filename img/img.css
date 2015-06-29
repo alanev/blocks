@@ -1,0 +1,6 @@
+.img{
+	background: #000;
+}
+.img_load_lazy{
+	background: url(img__preloader.gif) center no-repeat;
+}

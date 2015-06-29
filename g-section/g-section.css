@@ -1,7 +1,7 @@
-.g-section{
-	
+.g-section:not([class*=" "]){
+	margin: 3em 0;
 }
-.g-section__wrapper{
-	width: var(--wrapper);
+.g-section__content{
+	width: var(--content);
 	margin: 0 auto;
 }
