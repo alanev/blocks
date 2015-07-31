@@ -1,6 +1,13 @@
+/*vars*/
 :root{
 	--content: 1024px;
+	
+	--transtion: .3s;
+	
+	--color__: ;
 }
+
+/*media vars*/
 @custom-media --mobile (max-width:799px);
 @custom-media --tablet (max-width:1032px);
 
@@ -14,3 +21,5 @@
 		--content: 300px;
 	}
 }
+
+/*mixins*/
