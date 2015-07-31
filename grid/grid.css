@@ -1,16 +1,34 @@
 .grid{
 	display: flex;
 	justify-content: space-between;
-}
-.grid_justify_center{
-	justify-content: center;
-}
-.grid_justify_around{
-	justify-content: space-around;
-}
-.grid_align_center{
-	align-items: center;
-}
-.grid_dir_column{
-	flex-direction: column;
+	
+	/*mods*/
+	&._justify_center{
+		justify-content: center;
+	}
+	&._justify_around{
+		justify-content: space-around;
+	}
+	&._justify_start{
+		justify-content: flex-start;
+	}
+	&._align_center{
+		align-items: center;
+	}
+	&._dir_column{
+		flex-direction: column;
+	}
+	&._wrap{
+		flex-wrap: wrap;
+	}
+	
+	/*elements*/
+	&__col{
+		&._long{
+			flex: 1;
+		}
+		&._half{
+			flex: 1 50%;
+		}
+	}
 }

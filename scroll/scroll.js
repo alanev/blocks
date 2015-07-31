@@ -7,26 +7,14 @@
  * If you found bug, please contact me via email <13real008@gmail.com>
  *
  * @author Yuriy Khabarov aka Gromo
- * @version 0.2.6
+ * @version 0.2.5
  * @url https://github.com/gromo/jquery.scrollbar/
  *
  */
-
-// just use the umd declaration mode and remove the explicit global exports
-;(function(root, factory){
-    if(typeof define === 'function' && define.amd){
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else {
-        factory(root.jQuery, root, root.document);
-    }
-}(this, function($, win, doc){
+;
+(function($, doc, win){
     'use strict';
 
-    if(win === undefined || doc === undefined){
-        win = window;
-        doc = win.document;
-    }
     // init flags & variables
     var debug = false;
     var lmb = 1, px = "px";
@@ -64,12 +52,12 @@
         "autoUpdate": true,         // update scrollbar if content/container size changed
         "debug": false,             // debug mode
         "disableBodyScroll": false, // disable body scroll if mouse over container
-        "duration": 200,            // scroll animate duration in ms
+        "duration": 0,            // scroll animate duration in ms
         "ignoreMobile": true,       // ignore mobile devices
         "ignoreOverlay": true,      // ignore browsers with overlay scrollbars (mobile, MacOS)
         "scrollStep": 30,           // scroll step for scrollbar arrows
         "showArrows": false,        // add class to show arrows
-        "stepScrolling": true,      // when scrolling to scrollbar mousedown position
+        "stepScrolling": false,      // when scrolling to scrollbar mousedown position
         "type":"simple",            // [advanced|simple] scrollbar html type
 
         "scrollx": null,            // horizontal scroll element
@@ -85,7 +73,7 @@
     var customScrollbar = function(container, options){
 
         if(!browser.scroll){
-            browser.log("Init jQuery Scrollbar v0.2.6");
+            browser.log("Init jQuery Scrollbar v0.2.5");
             browser.overlay = isScrollOverlaysContent();
             browser.scroll = getBrowserScrollSize();
             updateScrollbars();
@@ -147,6 +135,7 @@
         },
 
 
+
         getScrollbar: function(d){
 
             var scrollbar = this.options["scroll" + d];
@@ -196,6 +185,7 @@
 
             return scrollbar.addClass("scroll-" + d);
         },
+
 
 
         init: function(options){
@@ -618,49 +608,70 @@
      */
     $.fn.scrollbar.options = defaults;
 
+    /**
+     * Extend AngularJS as UI directive
+     *
+     *
+     */
+    if(win.angular){
+        (function(angular){
+            var app = angular.module('jQueryScrollbar', []);
+            app.directive('jqueryScrollbar', function(){
+                return {
+                    "link": function(scope, element){
+                        element.scrollbar(scope.options).on('$destroy', function(){
+                            element.scrollbar('destroy');
+                        });
+                    },
+                    "restring": "AC",
+                    "scope": {
+                        "options": "=jqueryScrollbar"
+                    }
+                };
+            });
+        })(win.angular);
+    }
 
     /**
      * Check if scroll content/container size is changed
      */
+    var timer = 0, timerCounter = 0;
+    var updateScrollbars = function(force){
+        var i, c, o, s, w, x, y;
+        for( i = 0; i < browser.scrolls.length; i++){
+            s = browser.scrolls[i];
+            c = s.container;
+            o = s.options;
+            w = s.wrapper;
+            x = s.scrollx;
+            y = s.scrolly;
+            if(force || (o.autoUpdate && w && w.is(":visible") &&
+                (c.prop("scrollWidth") != x.size
+                    || c.prop("scrollHeight") != y.size
+                    || w.width()  != x.visible
+                    || w.height() != y.visible
+                    ))){
+                s.init();
 
-    var updateScrollbars = (function(){
-        var timer        = 0,
-            timerCounter = 0;
-
-        return function(force){
-            var i, container, options, scroll, wrapper, scrollx, scrolly;
-            for (i = 0; i < browser.scrolls.length; i++){
-                scroll    = browser.scrolls[i];
-                container = scroll.container;
-                options   = scroll.options;
-                wrapper   = scroll.wrapper;
-                scrollx   = scroll.scrollx;
-                scrolly   = scroll.scrolly;
-                if(force || (options.autoUpdate && wrapper && wrapper.is(":visible") &&
-                    (container.prop("scrollWidth") != scrollx.size || container.prop("scrollHeight") != scrolly.size || wrapper.width() != scrollx.visible || wrapper.height() != scrolly.visible))){
-                    scroll.init();
-
-                    if(debug){
-                        browser.log({
-                            "scrollHeight":  container.prop("scrollHeight") + ":" + scroll.scrolly.size,
-                            "scrollWidth":   container.prop("scrollWidth") + ":" + scroll.scrollx.size,
-                            "visibleHeight": wrapper.height() + ":" + scroll.scrolly.visible,
-                            "visibleWidth":  wrapper.width() + ":" + scroll.scrollx.visible
-                        }, true);
-                        timerCounter++;
-                    }
+                if(debug){
+                    browser.log({
+                        "scrollHeight":  c.prop("scrollHeight") + ":" + s.scrolly.size,
+                        "scrollWidth":   c.prop("scrollWidth") + ":" + s.scrollx.size,
+                        "visibleHeight": w.height() + ":" + s.scrolly.visible,
+                        "visibleWidth":  w.width() + ":" + s.scrollx.visible
+                    }, true);
+                    timerCounter++;
                 }
             }
-            if(debug && timerCounter > 10){
-                browser.log("Scroll updates exceed 10");
-                updateScrollbars = function(){
-                };
-            } else {
-                clearTimeout(timer);
-                timer = setTimeout(updateScrollbars, 300);
-            }
-        };
-    })();
+        }
+        if(debug && timerCounter > 10){
+            browser.log("Scroll updates exceed 10");
+            updateScrollbars = function(){};
+        } else {
+            clearTimeout(timer);
+            timer = setTimeout(updateScrollbars, 300);
+        }
+    };
 
     /* ADDITIONAL FUNCTIONS */
     /**
@@ -741,54 +752,12 @@
 
     function isVerticalScroll(event){
         var e = event.originalEvent;
-        if(e.axis && e.axis === e.HORIZONTAL_AXIS)
+        if (e.axis && e.axis === e.HORIZONTAL_AXIS)
             return false;
-        if(e.wheelDeltaX)
+        if (e.wheelDeltaX)
             return false;
         return true;
     }
-
-
-    /**
-     * Extend AngularJS as UI directive
-     * and expose a provider for override default config
-     *
-     */
-    if(win.angular){
-        (function(angular){
-            angular.module('jQueryScrollbar', [])
-            .provider('jQueryScrollbar', function(){
-                var defaultOptions = defaults;
-
-                return {
-                    setOptions: function(options){
-                        angular.extend(defaultOptions, options);
-                    },
-                    $get: function(){
-                        return {
-                            options: angular.copy(defaultOptions)
-                        };
-                    }
-                };
-            })
-            .directive('jqueryScrollbar', function(jQueryScrollbar, $parse){
-                return {
-                    "restrict": "AC",
-                    "link": function(scope, element, attrs){
-
-                        var model   = $parse(attrs.jqueryScrollbar),
-                            options = model(scope);
-
-                        element.scrollbar(options || jQueryScrollbar.options)
-                            .on('$destroy', function(){
-                                element.scrollbar('destroy');
-                            });
-                    }
-                };
-            });
-        })(win.angular)
-    }
-    
     $('.scroll').scrollbar();
 
-}));
+})(jQuery, document, window);
