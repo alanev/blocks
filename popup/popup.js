@@ -11,9 +11,9 @@ var page = $('.page'),
 				this.open(location.hash.replace('#popup/', ''));
 			}
 		},
-		close: function (popup) {
+		close: function () {
 			page.removeClass('lock').css({ 'margin-right': '' });
-			popup.removeClass(this.activeClass);
+			$('.popup').removeClass(this.activeClass);
 			history.replaceState('', '', location.pathname);
 		}
 	};
@@ -26,5 +26,5 @@ window.addEventListener('hashchange', function (e) {
 });
 
 $('.popup__close,.popup__overlay').click(function () {
-	popup.close($(this).parents('.popup'));
+	popup.close();
 });
