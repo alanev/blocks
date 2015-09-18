@@ -1,33 +1,70 @@
 .grid{
 	display: flex;
-	justify-content: space-between;
 	
 	/*mods*/
-	&._justify_center{
-		justify-content: center;
+	&_justify{
+		&_center{
+			justify-content: center;
+		}
+		&_between{
+			justify-content: space-between;
+		}
+		&_around{
+			justify-content: space-around;
+		}
+		&_start{
+			justify-content: flex-start;
+		}
+		&_end{
+			justify-content: flex-end;
+		}
 	}
-	&._justify_around{
-		justify-content: space-around;
+	&_align{
+		&_center{
+			align-items: center;
+		}
+		&_start{
+			align-items: flex-start;
+		}
+		&_end{
+			align-items: flex-end;
+		}
+		&_stretch{
+			align-items: stretch;
+		}
+		&_baseline{
+			align-items: baseline;
+		}
+	&_dir{
+		&_column{
+			flex-direction: column;
+		}
+		&_row{
+			flex-direction: row;
+		}
+		&_column-rev{
+			flex-direction: column-reverse;
+		}
+		&_row-rev{
+			flex-direction: row-reverse;
+		}
 	}
-	&._justify_start{
-		justify-content: flex-start;
+	&_wrap{
+		flex-wrap: wrap;
+		&_rev{
+			flex-wrap: wrap-reverse;
+		}
 	}
-	&._align_center{
-		align-items: center;
-	}
-	&._dir_column{
-		flex-direction: column;
-	}
-	&._wrap{
+	&_nowrap{
 		flex-wrap: wrap;
 	}
 	
 	/*elements*/
 	&__col{
-		&._long{
+		&_long{
 			flex: 1;
 		}
-		&._half{
+		&_half{
 			flex: 1 50%;
 		}
 	}

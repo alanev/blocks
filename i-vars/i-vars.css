@@ -7,19 +7,5 @@
 	--color__: ;
 }
 
-/*media vars*/
-@custom-media --mobile (max-width:799px);
-@custom-media --tablet (max-width:1032px);
-
-@media (--tablet){
-	:root{
-		--content: 640px;
-	}
-}
-@media (--mobile){
-	:root{
-		--content: 300px;
-	}
-}
 
 /*mixins*/

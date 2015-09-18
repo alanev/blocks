@@ -1,7 +1,8 @@
-.g-section:not([class*=" "]){
+/*.g-section:not([class*=" "]){
 	margin: 3em 0;
 }
 .g-section__content{
 	width: var(--content);
 	margin: 0 auto;
 }
+*/

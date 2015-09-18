@@ -6,7 +6,7 @@ $('form').submit(function () {
 		dataType: 'html',
 		data: form.serialize(),
 		success: function (response) {
-			popupOpen('thanks');
+			popup.open('thanks');
 		},
 		error: function (response) {
 			alert('Ошибка при отправке формы');
