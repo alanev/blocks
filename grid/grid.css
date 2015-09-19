@@ -35,6 +35,7 @@
 		&_baseline{
 			align-items: baseline;
 		}
+	}	
 	&_dir{
 		&_column{
 			flex-direction: column;
