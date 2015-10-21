@@ -3,10 +3,4 @@
 	min-width: 320px;
 	background: #fff;
 	overflow-x: hidden;
-	
-	/*elements*/
-	/*&__content{
-		width: var(--content);
-		margin: auto;
-	}*/
 }

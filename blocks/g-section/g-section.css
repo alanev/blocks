@@ -1,8 +1,7 @@
-/*.g-section:not([class*=" "]){
-	margin: 3em 0;
+.g-section{
+	
+	&__content{
+		width: 1024px;
+		margin: 0 auto;
+	}
 }
-.g-section__content{
-	width: var(--content);
-	margin: 0 auto;
-}
-*/
