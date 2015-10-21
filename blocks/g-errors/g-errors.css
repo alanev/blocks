@@ -35,4 +35,12 @@
 	.g-doc_no-flexbox .g-page > :not(&){
 		display: none;
 	}
+	&__old{
+		.g-doc_no-csstransforms &,
+		.g-doc_no-csscalc &,
+		.g-doc_no-flexbox &
+		{
+			display: block;
+		}
+	}
 }
