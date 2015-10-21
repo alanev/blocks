@@ -1,4 +1,6 @@
 .g-errors{
+	
+	/*elements*/
 	&__item{
 		display: none;
 		position: fixed;
@@ -18,7 +20,7 @@
 	}
 	&__popup{
 		bottom: 0;
-		padding: 20% 0;
+		padding: 10% 0;
 	}
 	&__logo{
 		outline: 0;
