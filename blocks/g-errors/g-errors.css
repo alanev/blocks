@@ -14,7 +14,7 @@
 		font-size: 18px;
 		font-weight: 700;
 		line-height: 30px;
-		opacity: .8;
+		opacity: 1;
 	}
 	&__popup{
 		bottom: 0;
@@ -24,9 +24,13 @@
 		outline: 0;
 		border: 0;
 		margin: 20px;
-		opacity: .7;
+		opacity: .8;
+		
 		&:hover{
 			opacity: 1;
 		}
+	}
+	.g-doc_no-flexbox .g-page > :not(&){
+		display: none;
 	}
 }
