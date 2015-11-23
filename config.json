@@ -1,0 +1,24 @@
+{
+	"port": 8001,
+	"docClass": ".g-doc_",
+	"modules": {
+	},
+	"modernizr": {
+		"minify": true,
+		"classPrefix": "g-doc_",
+		"options": [
+			"setClasses"
+		],
+		"feature-detects": [
+			"css/calc",
+			"css/columns",
+			"css/flexbox",
+			"css/flexboxlegacy",
+			"css/flexboxtweener",
+			"css/flexwrap",
+			"css/transforms",
+			"img/webp",
+			"svg/inline"
+		]
+	}
+}
